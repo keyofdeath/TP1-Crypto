@@ -21,7 +21,7 @@ public class Main {
 
         PlayFair playFair = new PlayFair();
         try {
-            String chiffre = playFair.chiffre_texte("lechattonestla");
+            String chiffre = playFair.chiffre_texte("ttxtlechattonestlatotxt");
             String dechiffre = playFair.dechiffre_texte(chiffre);
             System.out.println(chiffre);
             System.out.println(dechiffre);
