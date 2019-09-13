@@ -18,6 +18,16 @@ public class Main {
         totalGramValue = getTotalGramValue();
 
         System.out.println("Prob QIRSOPBBMF = " + getWordScore("QIRSOPBBMF"));
+
+        PlayFair playFair = new PlayFair();
+        try {
+            String chiffre = playFair.chiffre_texte("lechattonestla");
+            String dechiffre = playFair.dechiffre_texte(chiffre);
+            System.out.println(chiffre);
+            System.out.println(dechiffre);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
