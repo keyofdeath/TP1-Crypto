@@ -15,19 +15,23 @@ public class Main {
         System.out.println("Prob QIRSOPBBMF = " + getWordScore("QIRSOPBBMF"));
     }
 
-    public Main() {
-    }
 
+    /**
+     * Fonction qui permet de calculer le score d'une chaine.
+     * @param word La chaine
+     * @return Le score de la chaine
+     */
     private static double getWordScore(String word){
         double res = 0;
-        for(int i = 0; i <= word.length() - gramSize; i ++)
-        {
-            System.out.println(word.substring(i, i + (gramSize)) + " : " + Math.log(getGramProbability(word.substring(i, i + (gramSize)))));
-            res += Math.log(getGramProbability(word.substring(i, i + (gramSize))));
-        }
+        for(int i = 0; i <= word.length() - gramSize; i ++) res += Math.log(getGramProbability(word.substring(i, i + (gramSize))));
         return res;
     }
 
+    /**
+     * Fonction qui calcul le taux d'apparition d'une chaine.
+     * @param gram La chaine
+     * @return Le taux d'apparition de la chaine
+     */
     private static double getGramProbability(String gram){
         double res = 0;
         if(dictionary.get(gram) != null) res = dictionary.get(gram);
@@ -35,6 +39,10 @@ public class Main {
         return res / totalGramValue;
     }
 
+    /**
+     * Fonction qui calcul le nombre total d'occurence dans le fichier.
+     * @return Le nombre total d'occurence dans le fichier.
+     */
     private static int getTotalGramValue(){
         int res = 0;
         Collection<Integer> values = dictionary.values();

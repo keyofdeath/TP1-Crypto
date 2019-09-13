@@ -5,10 +5,15 @@ import java.util.HashMap;
 
 public class GramsReader {
 
+    /**
+     * Fonction qui créer un dictionnaire ayant pour clés des grams et pour valeurs le nombre d'occurence de ces grams.
+     * @param fileName Le nom du fichier contenant les grams et leur nombre d'occurence
+     * @return Notre dictionnaire
+     */
     public static HashMap<String, Integer> readGrams(String fileName){
         HashMap<String, Integer> dictionary = new HashMap<>();
         try {
-            FileInputStream fis = new FileInputStream(fileName);
+            FileInputStream fis = new FileInputStream("ngrams/" + fileName);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String line;
