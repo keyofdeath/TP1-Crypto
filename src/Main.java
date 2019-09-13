@@ -1,6 +1,11 @@
 import java.util.Collection;
 import java.util.HashMap;
 
+/**
+ * Usage:
+ * arg[0] -> nom du fichier contenant les grams
+ * arg[1] -> taille des grams
+ */
 public class Main {
 
     private static HashMap<String, Integer> dictionary;
@@ -40,7 +45,7 @@ public class Main {
     }
 
     /**
-     * Fonction qui calcul le nombre total d'occurence dans le fichier.
+     * Fonction qui calcule le nombre total d'occurence dans le fichier.
      * @return Le nombre total d'occurence dans le fichier.
      */
     private static int getTotalGramValue(){
