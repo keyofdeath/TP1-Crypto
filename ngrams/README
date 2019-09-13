@@ -1,0 +1,8 @@
+Pierre.Hyvernat@univ-smb.fr
+
+N-grams data extracted from English and French data obtained from
+http://wortschatz.uni-leipzig.de/en/download/
+
+Each file contains a list of N-grams of A-Z letters, followed by a tab
+characters and a number of occurences.
+
