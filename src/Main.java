@@ -23,8 +23,8 @@ public class Main {
         try {
             String chiffre = playFair.chiffre_texte("ttxtlechattonestlatotxt");
             String dechiffre = playFair.dechiffre_texte(chiffre);
-            System.out.println(chiffre);
-            System.out.println(dechiffre);
+            System.out.println("Texte chiffrer: " + chiffre);
+            System.out.println("Texte dechiffre: " + dechiffre);
         } catch (Exception e) {
             e.printStackTrace();
         }

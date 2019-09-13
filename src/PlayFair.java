@@ -50,7 +50,12 @@ public class PlayFair {
         return t;
     }
 
-    private char[][] perturbe_cle(char[][] key){
+    /**
+     * Modifie le clef en entrer
+     * @param key
+     * @return
+     */
+    public char[][] perturbe_cle(char[][] key){
 
         int[] pos1, pos2;
         pos1 = get_rand_pair(0, KEY.length);
