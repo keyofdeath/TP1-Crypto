@@ -35,19 +35,23 @@ public class PlayFair {
         // Si c'est la meme ligne
         if (pos1[0] == pos2[0]) {
             int x1, x2;
-            x1 = (pos1[1] + 1) % KEY[pos1[0]].length;
-            x2 = (pos2[1] + 1) % KEY[pos2[0]].length;
+            x1 = math_mod(pos1[1] + 1, KEY[pos1[0]].length);
+            x2 = math_mod(pos2[1] + 1, KEY[pos2[0]].length);
             return str + KEY[pos1[0]][x1] + KEY[pos2[0]][x2];
         // Si c'est la meme ligne
         } else if (pos1[1] == pos2[1]) {
             int y1, y2;
-            y1 = (pos1[0] + 1) % KEY.length;
-            y2 = (pos2[0] + 1) % KEY.length;
+            y1 = math_mod(pos1[0] + 1, KEY.length);
+            y2 = math_mod(pos2[0] + 1, KEY.length);
             return str + KEY[y1][pos1[1]] + KEY[y2][pos2[1]];
         // Si il sont en digonale
         } else {
             return str + KEY[pos2[0]][pos1[1]] + KEY[pos1[0]][pos2[1]];
         }
+    }
+
+    private int math_mod(int a, int b){
+        return ((a % b) + b) % b;
     }
 
     /**
@@ -62,14 +66,14 @@ public class PlayFair {
         // Si c'est la meme ligne
         if (pos1[0] == pos2[0]) {
             int x1, x2;
-            x1 = (pos1[1] - 1) % KEY[pos1[0]].length;
-            x2 = (pos2[1] - 1) % KEY[pos2[0]].length;
+            x1 = math_mod(pos1[1] - 1, KEY[pos1[0]].length);
+            x2 = math_mod(pos2[1] - 1, KEY[pos2[0]].length);
             return str + KEY[pos1[0]][x1] + KEY[pos2[0]][x2];
         // Si c'est la meme ligne
         } else if (pos1[1] == pos2[1]) {
             int y1, y2;
-            y1 = (pos1[0] - 1) % KEY.length;
-            y2 = (pos2[0] - 1) % KEY.length;
+            y1 = math_mod(pos1[0] - 1, KEY.length);
+            y2 = math_mod(pos2[0] - 1, KEY.length);
             return str + KEY[y1][pos1[1]] + KEY[y2][pos2[1]];
         // Si il sont en digonale
         } else {
@@ -113,8 +117,6 @@ public class PlayFair {
     public String dechiffre_texte(String text) throws Exception {
 
         StringBuilder res = new StringBuilder();
-        if (text.length() % 2 != 0)
-            text += 'x';
         for (int i = 0; i < text.length(); i += 2) {
             int[] pos1 = get_pos(text.charAt(i));
             int[] pos2 = get_pos(text.charAt(i + 1));
