@@ -141,24 +141,33 @@ public class PlayFair {
     public String chiffre_texte(String text) throws Exception {
 
         StringBuilder res = new StringBuilder();
+        StringBuilder reformat_text = new StringBuilder();
         text = text.replace('j', 'i');
-        if (text.length() % 2 != 0)
-            text += 'x';
-        for (int i = 0; i < text.length(); i += 2) {
-            int[] pos1 = get_pos(text.charAt(i));
-            int[] pos2 = get_pos(text.charAt(i + 1));
+        // on rajoute un x si deux lettre son egaux
+        for (int i = 0; i < text.length() - 1; i += 2) {
+            if (text.charAt(i) == text.charAt(i + 1)) {
+                reformat_text.append(text.charAt(i)).append('x').append(text.charAt(i + 1));
+            }else{
+                reformat_text.append(text.charAt(i)).append(text.charAt(i + 1));
+            }
+        }
+        if (reformat_text.length() % 2 != 0)
+            reformat_text.append('x');
+        int[] pos1, pos2;
+        char c1, c2;
+        // on a un text avec un nombre de lettre paire
+        for (int i = 0; i < reformat_text.length(); i += 2) {
+            c1 = reformat_text.charAt(i);
+            c2 = reformat_text.charAt(i + 1);
+            pos1 = get_pos(c1);
+            pos2 = get_pos(c2);
             if (pos1 == null || pos2 == null) {
                 throw new Exception("l1 or l2 not in the key tab");
-            // Si les deux char son egaut on rajoute x
-            } else if (text.charAt(i) == text.charAt(i + 1)) {
-                res.append(text.charAt(i)).append('x').append(text.charAt(i + 1));
-            } else {
-                res.append(chiffre_paire(pos1, pos2));
             }
+            res.append(chiffre_paire(pos1, pos2));
         }
         return res.toString();
     }
-
     /**
      * dechiffre un texte
      * @param text
@@ -167,18 +176,30 @@ public class PlayFair {
      */
     public String dechiffre_texte(String text) throws Exception {
 
+        StringBuilder dechifre_text = new StringBuilder();
         StringBuilder res = new StringBuilder();
+        int[] pos1, pos2;
+        char c1, c2;
         for (int i = 0; i < text.length(); i += 2) {
-            int[] pos1 = get_pos(text.charAt(i));
-            int[] pos2 = get_pos(text.charAt(i + 1));
+            c1 = text.charAt(i);
+            c2 = text.charAt(i + 1);
+            pos1 = get_pos(c1);
+            pos2 = get_pos(c2);
             if (pos1 == null || pos2 == null) {
                 throw new Exception("l1 or l2 not in the key tab");
+            }
             // Si les deux char suivent est un x on supose qu'il a ete rajouter donc on le retire
-            } else if (text.charAt(i + 1) == 'x') {
-                res.append(text.charAt(i)).append(text.charAt(i + 2));
-                i += 1;
-            } else {
-                res.append(dechiffre_paire(pos1, pos2));
+            dechifre_text.append(dechiffre_paire(pos1, pos2));
+        }
+        if(dechifre_text.charAt(dechifre_text.length() - 1) == 'x')
+            dechifre_text.deleteCharAt(dechifre_text.length() - 1);
+
+        for (int i = 0; i < dechifre_text.length() - 1; i += 2) {
+            if (dechifre_text.charAt(i) == dechifre_text.charAt(i + 2)) {
+                res.append(dechifre_text.charAt(i)).append(dechifre_text.charAt(i + 2));
+                i++;
+            }else{
+                res.append(dechifre_text.charAt(i)).append(dechifre_text.charAt(i + 1));
             }
         }
         return res.toString();
