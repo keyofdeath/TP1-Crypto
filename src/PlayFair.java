@@ -211,17 +211,17 @@ public class PlayFair {
             // Si les deux char suivent est un x on supose qu'il a ete rajouter donc on le retire
             dechifre_text.append(dechiffre_paire(pos1, pos2, key));
         }
-        if (dechifre_text.charAt(dechifre_text.length() - 1) == 'x')
-            dechifre_text.deleteCharAt(dechifre_text.length() - 1);
-
-        for (int i = 0; i < dechifre_text.length() - 1; i += 2) {
-            if (dechifre_text.charAt(i) == dechifre_text.charAt(i + 2)) {
+        for (int i = 0; i < dechifre_text.length(); i += 2) {
+            if (i + 2 < dechifre_text.length() && dechifre_text.charAt(i) == dechifre_text.charAt(i + 2)) {
                 res.append(dechifre_text.charAt(i)).append(dechifre_text.charAt(i + 2));
                 i++;
             } else {
                 res.append(dechifre_text.charAt(i)).append(dechifre_text.charAt(i + 1));
             }
         }
+
+        if (res.charAt(res.length() - 1) == 'x')
+            res.deleteCharAt(res.length() - 1);
         return res.toString();
     }
 }
