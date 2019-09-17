@@ -21,17 +21,17 @@ public class Main {
 
         PlayFair playFair = new PlayFair();
         try {
-            String chiffre = playFair.chiffre_texte("ttxtlechattonestlatotxt");
-            String dechiffre = playFair.dechiffre_texte(chiffre);
+            String chiffre = playFair.chiffre_texte("ttxtlechattonestlatotxt", PlayFair.KEY_CONST);
+            String dechiffre = playFair.dechiffre_texte(chiffre, PlayFair.KEY_CONST);
             System.out.println("Texte chiffrer: " + chiffre);
             System.out.println("Texte dechiffre: " + dechiffre);
         } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println("Key original");
-        PlayFair.display_key(PlayFair.getKEY());
+        PlayFair.display_key(PlayFair.KEY_CONST);
         System.out.println("Edit key");
-        char[][] k = playFair.perturbe_cle(PlayFair.getKEY());
+        char[][] k = playFair.perturbe_cle(PlayFair.KEY_CONST);
         PlayFair.display_key(k);
     }
 
