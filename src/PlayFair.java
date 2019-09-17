@@ -60,7 +60,7 @@ public class PlayFair {
         int[] pos1, pos2;
         pos1 = get_rand_pair(0, KEY.length);
         pos2 = pos1;
-        while (pos1[0] == pos2[0] && pos1[1] == pos2[1])
+        while (pos1[0] == pos2[0] || pos1[1] == pos2[1])
             pos2 = get_rand_pair(0, KEY.length);
 
         // Permutation de deux lettre
@@ -73,7 +73,7 @@ public class PlayFair {
 
         // Permutation de deux colomne
         for(int y=0; y < KEY.length; y++)
-            res = permutation(new int[]{y, pos1[1]}, new int[]{y, pos2[1]}, res);
+            permutation(new int[]{y, pos1[1]}, new int[]{y, pos2[1]}, res);
         return res;
 
     }
@@ -203,5 +203,18 @@ public class PlayFair {
             }
         }
         return res.toString();
+    }
+
+    public static char[][] getKEY() {
+        return KEY;
+    }
+
+    public static void display_key(char [][] key){
+        for (char[] line: key) {
+            for(char l: line){
+                System.out.print(l);
+            }
+            System.out.print('\n');
+        }
     }
 }
