@@ -9,10 +9,10 @@ public class Main {
 
     private static final String text = "EDPGSONSCQHSEUCEOAURGRCQRSFOQINHSODLGPCEOLNRDQGXSNNCDUCEOEQNCBGADEKFKNCPOWOAKQDHHOLZDZASRUQDRACPIEFKTMSAQDOEECCBSAGWRQQNBXSPWGASSMOSSOBNHUIEDORAGQPRQRIOAOFKOSUMAHMLSRCQWASOASOLQGAOHDASQFGRSPSCOEORSEOGSHXFECAWSQGOOAQFIZHSAOMLARCQNLOISPHKAHDISQLOCGDEGODOQDOAYCAWSOAOTSASPBNRIOAOOKSHAWOSSAOEORSEOGOGUMAIGQPGWHLOFNHSEOAOSOQZFKCGAWOAGOTSNCQKDKOSKNDHRPNSPRLZAOESNCASQIASWACBNCARASEUOKQY";
 
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
 
         PlayFair playFair = new PlayFair();
-        String chiffre = playFair.chiffre_texte(/*"ttxtlechattonestlatotxt"*/text.toLowerCase(), PlayFair.KEY_CONST);
+        String chiffre = playFair.chiffre_texte("lechattonestlalechattonestlalechattonestlalechattonestlalechattonestla", PlayFair.KEY_CONST);
         String dechiffre = playFair.dechiffre_texte(chiffre, PlayFair.KEY_CONST);
         System.out.println("Texte chiffrer: " + chiffre);
         System.out.println("Texte dechiffre: " + dechiffre);
@@ -22,7 +22,7 @@ public class Main {
 
         Grams grams = new Grams(Integer.parseInt(args[1]), GramsReader.readGrams(args[0]));
         Crack crack = new Crack(grams, new PlayFair());
-        char[][] crackedKey = crack.crack(chiffre, 5, text.length() / 8, 0.1, 50000);
+        char[][] crackedKey = crack.crack(chiffre, 5, text.length() / 8, 0.2, 50000);
         System.out.println("Cracked key");
         PlayFair.display_key(crackedKey);
 

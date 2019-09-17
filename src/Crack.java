@@ -10,7 +10,8 @@ public class Crack {
 
     public char[][] crack(String text, int initialTemp, int finalTemp, double tempStep, int Nlimit) throws Exception {
         int temp = initialTemp;
-        char[][] key = playFair.perturbe_cle(PlayFair.KEY_CONST);
+        char[][] key = PlayFair.KEY_CONST;
+        for(int i = 0; i < 3; i++) key = playFair.perturbe_cle(key);
         while(temp > finalTemp){
             // on teste N perturbations de la clé
             for(int k = 1; k < Nlimit; k++){
