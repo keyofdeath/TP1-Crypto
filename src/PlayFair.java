@@ -58,13 +58,16 @@ public class PlayFair {
     public char[][] perturbe_cle(char[][] key){
 
         int[] pos1, pos2;
+        char[][] res = new char[key.length][key[0].length];
+        for(int i=0; i<key.length; i++)
+            System.arraycopy(key[i], 0, res[i], 0, key[i].length);
         pos1 = get_rand_pair(0, KEY.length);
         pos2 = pos1;
         while (pos1[0] == pos2[0] || pos1[1] == pos2[1])
             pos2 = get_rand_pair(0, KEY.length);
 
         // Permutation de deux lettre
-        char[][]res = permutation(pos1, pos2, key);
+        permutation(pos1, pos2, res);
 
         // Permutation de deux ligne
         char[] l_temp = res[pos1[0]];
