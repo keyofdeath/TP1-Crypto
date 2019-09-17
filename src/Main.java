@@ -1,76 +1,38 @@
-import java.util.Collection;
-import java.util.HashMap;
 
 /**
  * Usage:
  * arg[0] -> nom du fichier contenant les grams
  * arg[1] -> taille des grams
  */
+
 public class Main {
 
-    private static HashMap<String, Integer> dictionary;
-    private static int gramSize;
-    private static int totalGramValue;
+    private static final String text = "EDPGSONSCQHSEUCEOAURGRCQRSFOQINHSODLGPCEOLNRDQGXSNNCDUCEOEQNCBGADEKFKNCPOWOAKQDHHOLZDZASRUQDRACPIEFKTMSAQDOEECCBSAGWRQQNBXSPWGASSMOSSOBNHUIEDORAGQPRQRIOAOFKOSUMAHMLSRCQWASOASOLQGAOHDASQFGRSPSCOEORSEOGSHXFECAWSQGOOAQFIZHSAOMLARCQNLOISPHKAHDISQLOCGDEGODOQDOAYCAWSOAOTSASPBNRIOAOOKSHAWOSSAOEORSEOGOGUMAIGQPGWHLOFNHSEOAOSOQZFKCGAWOAGOTSNCQKDKOSKNDHRPNSPRLZAOESNCASQIASWACBNCARASEUOKQY";
 
-    public static void main(String args[]) {
-        dictionary = GramsReader.readGrams(args[0]);
-        gramSize = Integer.parseInt(args[1]);
-        totalGramValue = getTotalGramValue();
-
-        System.out.println("Prob QIRSOPBBMF = " + getWordScore("QIRSOPBBMF"));
+    public static void main(String args[]) throws Exception {
 
         PlayFair playFair = new PlayFair();
-        try {
-            String chiffre = playFair.chiffre_texte("ttxtlechattonestlatotxt", PlayFair.KEY_CONST);
-            String dechiffre = playFair.dechiffre_texte(chiffre, PlayFair.KEY_CONST);
-            System.out.println("Texte chiffrer: " + chiffre);
-            System.out.println("Texte dechiffre: " + dechiffre);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String chiffre = playFair.chiffre_texte(/*"ttxtlechattonestlatotxt"*/text.toLowerCase(), PlayFair.KEY_CONST);
+        String dechiffre = playFair.dechiffre_texte(chiffre, PlayFair.KEY_CONST);
+        System.out.println("Texte chiffrer: " + chiffre);
+        System.out.println("Texte dechiffre: " + dechiffre);
+
         System.out.println("Key original");
         PlayFair.display_key(PlayFair.KEY_CONST);
-        System.out.println("Edit key");
-        char[][] k = playFair.perturbe_cle(PlayFair.KEY_CONST);
-        PlayFair.display_key(k);
+
+        Grams grams = new Grams(Integer.parseInt(args[1]), GramsReader.readGrams(args[0]));
+        Crack crack = new Crack(grams, new PlayFair());
+        char[][] crackedKey = crack.crack(chiffre, 5, text.length() / 8, 0.1, 50000);
+        System.out.println("Cracked key");
+        PlayFair.display_key(crackedKey);
+
+        dechiffre = playFair.dechiffre_texte(chiffre, crackedKey);
+        System.out.println("Texte dechiffre: " + dechiffre);
     }
 
 
-    /**
-     * Fonction qui permet de calculer le score d'une chaine.
-     *
-     * @param word La chaine
-     * @return Le score de la chaine
-     */
-    private static double getWordScore(String word) {
-        double res = 0;
-        for (int i = 0; i <= word.length() - gramSize; i++)
-            res += Math.log(getGramProbability(word.substring(i, i + (gramSize))));
-        return res;
-    }
 
-    /**
-     * Fonction qui calcul le taux d'apparition d'une chaine.
-     *
-     * @param gram La chaine
-     * @return Le taux d'apparition de la chaine
-     */
-    private static double getGramProbability(String gram) {
-        double res = 0;
-        if (dictionary.get(gram) != null) res = dictionary.get(gram);
-        else res = 0.01;
-        return res / totalGramValue;
-    }
 
-    /**
-     * Fonction qui calcule le nombre total d'occurence dans le fichier.
-     *
-     * @return Le nombre total d'occurence dans le fichier.
-     */
-    private static int getTotalGramValue() {
-        int res = 0;
-        Collection<Integer> values = dictionary.values();
-        for (int value : values) res += value;
-        return res;
-    }
+
+
 }
