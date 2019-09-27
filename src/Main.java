@@ -2,7 +2,7 @@ import javax.swing.*;
 
 /**
  * Usage: Main <nom-fichier> <grams-length> <text> <est-chiffrer>
- * <p>
+ *
  * <nom-fichier> -> nom du fichier contenant les grams
  * <grams-length> -> taille des grams
  * <text> -> text
