@@ -1,13 +1,30 @@
+/**
+ * Crack l'algorithm de PlayFair
+ */
 public class Crack {
 
     private PlayFair playFair;
     private Grams grams;
 
+    /**
+     * @param grams grams pour la detection des mots
+     * @param playFair Algo de playfare pour dechiffrer
+     */
     public Crack(Grams grams, PlayFair playFair){
         this.playFair = playFair;
         this.grams = grams;
     }
 
+    /**
+     *
+     * @param text text dechiffrer
+     * @param initialTemp temperature initial pour le calcule recuit simulé
+     * @param finalTemp tmperature finale
+     * @param tempStep décrément pour la températur
+     * @param Nlimit nombre de clé à tester pour chaque température
+     * @return la clef trouver
+     * @throws Exception
+     */
     public char[][] crack(String text, int initialTemp, int finalTemp, double tempStep, int Nlimit) throws Exception {
         int temp = initialTemp;
         char[][] key = PlayFair.KEY_CONST;

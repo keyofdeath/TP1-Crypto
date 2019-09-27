@@ -11,6 +11,11 @@ public class PlayFair {
     public PlayFair() {
     }
 
+    /**
+     * Affiche une clef
+     *
+     * @param key clef a afficher
+     */
     public static void display_key(char[][] key) {
         for (char[] line : key) {
             for (char l : line) {
@@ -38,14 +43,21 @@ public class PlayFair {
     /**
      * Fait le modulo mathematique si chiffre < 0 il revient a b - 1
      *
-     * @param a
-     * @param b
+     * @param a chiffre a
+     * @param b chifre
      * @return a mod b
      */
     private int math_mod(int a, int b) {
         return ((a % b) + b) % b;
     }
 
+    /**
+     * Obtien un paire aléatoire
+     *
+     * @param min valeur min incluse
+     * @param max valeur max exclus
+     * @return liste de 2 chiffre aléatoire
+     */
     private int[] get_rand_pair(int min, int max) {
         int random1 = ThreadLocalRandom.current().nextInt(min, max);
         int random2 = random1;
@@ -65,7 +77,7 @@ public class PlayFair {
      * Modifie le clef en entrer
      *
      * @param key
-     * @return
+     * @return la clef perturber
      */
     public char[][] perturbe_cle(char[][] key) {
 
@@ -152,7 +164,7 @@ public class PlayFair {
     /**
      * Chiffre un texte
      *
-     * @param text
+     * @param text text non chiffrer
      * @return le texte chiffrer
      * @throws Exception Si il y a des lettre qui ne sont pas dans la tableau key
      */
@@ -190,7 +202,7 @@ public class PlayFair {
     /**
      * dechiffre un texte
      *
-     * @param text
+     * @param text text chuiffrer
      * @return le texte dechiffre
      * @throws Exception Si il y a des lettre qui ne sont pas dans la tableau key
      */
@@ -218,7 +230,7 @@ public class PlayFair {
                 } else {
                     res.append(dechifre_text.substring(i, i + 3));
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 res.append(dechifre_text.substring(i, dechifre_text.length()));
             }
         }
